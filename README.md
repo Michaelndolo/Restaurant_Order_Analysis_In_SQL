@@ -8,11 +8,7 @@
 
 -[Tools](#tools)
 
--[Data Cleaning](#data-cleaning)
-
 -[Exploratory Data Analysis](#exploratory-data-analysis)
-
--[Data Analysis](#data-analysis)
 
 -[Findings](#findings)
 
@@ -44,7 +40,7 @@ Restaurant Orders Data: The primary dataset used for this analysis is from the m
 ### Tools
 ---
 
-- MySQL - Data Analysis
+- MySQL - Data Analysis, GROUP BY, HAVING, WHERE, ORDER BY, SUBQUERIES, LEFT JOIN, AGGREGATE FUNCTIONS
   
 ### Exploratory Data Analysis
 ---
@@ -52,37 +48,211 @@ Restaurant Orders Data: The primary dataset used for this analysis is from the m
 Now, it is important to note that the dataset was clean are requirred no cleaning with the main use was to show how Exploratory Data Analysis can be done in MySQL.
 EDA involved performing the three objectives mentioned above. 
 
-#### Objective 1
+#### Objective 1: Explore the menu_items table
 
 - View the menu_items table.
 
   ``` SQL
   SELECT *
   FROM menu_items;
+  ```
   
-- View the menu_items table and write a query to find the number of items on the menu.
+- Find the number of items on the table.
 
+  ``` SQL
+  SELECT COUNT(*)
+  FROM menu_items;
+  ```
 
-### Exploratory Data Analysis
----
+- What are the least and most expensive items on the menu?
 
-EDA involved exploring the sales data to answer key questions, such as:
+  ``` SQL
+  SELECT *
+  FROM menu_items
+  ORDER BY price;
+  ```
 
-- What is the overall sales trend?
-- Which products are top sellers?
-- What are the peak sales periods?
+  ``` SQL
+  SELECT *
+  FROM menu_items
+  ORDER BY price DESC;
+  ```
+   
+- How many Italian dishes are on the menu?
 
-### Data Analysis
----
+  ``` SQL
+  SELECT COUNT(*)
+  FROM menu_items
+  WHERE category = 'Italian';
+  ```
 
-Include some interesting code/features worked with
+- What are the least and most expensive Italian dishes are on the menu?
 
-``` SQL
-SELECT *
-FROM table 1
-WHERE cond = 2;
-```
+  ``` SQL
+  SELECT *
+  FROM menu_items
+  WHERE category = 'Italian'
+  ORDER BY price;
+  ```
 
+  ``` SQL
+  SELECT *
+  FROM menu_items
+  WHERE category = 'Italian'
+  ORDER BY price DESC;
+  ```
+
+- How many dishes are in each category?
+
+  ``` SQL
+  SELECT category, COUNT(menu_item_id) AS num_dishes
+  FROM menu_items
+  GROUP BY category;
+  ```
+
+- What is the average dish price within each category?
+
+  ``` SQL
+  SELECT category, AVG(price) AS Avg_dish_price
+  FROM menu_items
+  GROUP BY category;
+  ```
+
+#### Objective 2: Explore the order_details table
+
+- View the order_details table.
+
+  ``` SQL
+  SELECT *
+  FROM order_details;
+  ```
+
+- What is the date range of this table?
+
+  ``` SQL
+  SELECT MIN(order_date), MAX(order_date)
+  FROM order_details;
+  ```
+
+- How many orders were made within this date range?
+
+  ``` SQL
+  SELECT COUNT(DISTINCT order_id) AS Orders_made
+  FROM order_details;
+  ```
+
+- How many items were ordered within this date range?
+
+  ``` SQL
+  SELECT COUNT(*) AS Items_ordered
+  FROM order_details;
+  ```
+
+- Which orders had the most number of items?
+
+  ``` SQL
+  SELECT order_id, COUNT(item_id) AS num_items
+  FROM order_details
+  GROUP BY order_id
+  ORDER BY num_items DESC;
+  ```
+
+- How many orders had more than 12 items?
+
+  ``` SQL
+  SELECT COUNT(*)
+  FROM (SELECT order_id, COUNT(item_id) AS num_items
+  FROM order_details
+  GROUP BY order_id
+  ORDER BY num_items
+  HAVING num_items > 12) AS num_orders;
+  ```
+
+#### Objective 3: Jointly Explore the two tables
+
+- Combine the menu_items table and the order_details table into a single table.
+
+  ``` SQL
+  SELECT * 
+  FROM order_details AS OD 
+  LEFT JOIN menu_items AS MI 
+     ON OD.item_id = MI.menu_item_id;
+  ```
+
+- What were the least and most ordered items?
+
+  ``` SQL
+  SELECT item_name, COUNT(order_details_id) AS num_purchases
+  FROM order_details AS OD 
+  LEFT JOIN menu_items AS MI 
+     ON OD.item_id = MI.menu_item_id
+  GROUP BY item_name
+  ORDER BY num_purchases;
+  ```
+
+  ``` SQL
+  SELECT item_name, COUNT(order_details_id) AS num_purchases
+  FROM order_details AS OD 
+  LEFT JOIN menu_items AS MI 
+     ON OD.item_id = MI.menu_item_id
+  GROUP BY item_name
+  ORDER BY num_purchases DESC;
+  ```
+
+- What categories were they in?
+    
+  ``` SQL
+  SELECT item_name, category COUNT(order_details_id) AS num_purchases
+  FROM order_details AS OD 
+  LEFT JOIN menu_items AS MI 
+     ON OD.item_id = MI.menu_item_id
+  GROUP BY item_name, category
+  ORDER BY num_purchases;
+  ```
+
+  ``` SQL
+  SELECT item_name, category COUNT(order_details_id) AS num_purchases
+  FROM order_details AS OD 
+  LEFT JOIN menu_items AS MI 
+     ON OD.item_id = MI.menu_item_id
+  GROUP BY item_name, category
+  ORDER BY num_purchases DESC;
+  ```
+
+- What were the top 5 orders that spent the most money?
+    
+  ``` SQL
+  SELECT order_id, SUM(price) AS total_spend
+  FROM order_details AS OD 
+  LEFT JOIN menu_items AS MI 
+     ON OD.item_id = MI.menu_item_id
+  GROUP BY order_id
+  ORDER BY total_spend DESC
+  LIMIT 5;
+  ```
+
+- View details of the highest spend order. What insights can you gather from this?
+    
+  ``` SQL
+  SELECT category, COUNT(item_id) AS num_items
+  FROM order_details AS OD 
+  LEFT JOIN menu_items AS MI 
+     ON OD.item_id = MI.menu_item_id
+  WHERE order_id = 440
+  GROUP BY category;
+  ```
+
+- View details of the top 5 highest spend orders. What insights can you gather from this?
+    
+  ``` SQL
+  SELECT order_id, category, COUNT(item_id) AS num_items
+  FROM order_details AS OD 
+  LEFT JOIN menu_items AS MI 
+     ON OD.item_id = MI.menu_item_id
+  WHERE order_id IN(440, 2075, 1957, 330, 2675
+  GROUP BY order_id, category;
+  ```
+  
 ### Findings
 ---
 
