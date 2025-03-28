@@ -1,4 +1,4 @@
-# Restaurant Orders Analysis
+## Restaurant Orders Analysis
 
 ## Table of Contents
 
@@ -39,22 +39,29 @@ There are three objectives:
 ### Data Sources
 ---
 
-Sales Data: The primary dataset used for this analysis is the "sales_data.csv" file, containing detailed information about each sale made by the company.
+Restaurant Orders Data: The primary dataset used for this analysis is from the maven analytics playground  tittled the "sales_data.csv" file, containing two tables menu items table and order details table detailed information about each sale made by the company. We downloaded the SQL option instead of csv since we'll be using MySQL.
 
 ### Tools
 ---
 
-- Excel - Data Cleaning [Download here](https://microsoft.com)
-- SQL Server - Data Analysis
-- PowerBI - Data Visualization
-
-### Data Cleaning
+- MySQL - Data Analysis
+  
+### Exploratory Data Analysis
 ---
 
-In the initial data preparation phase, we performed the following tasks:
-1. Data loading and inspection.
-2. Handling missing values.
-3. Data cleaning and formatting.
+Now, it is important to note that the dataset was clean are requirred no cleaning with the main use was to show how Exploratory Data Analysis can be done in MySQL.
+EDA involved performing the three objectives mentioned above. 
+
+#### Objective 1
+
+- View the menu_items table.
+
+  ``` SQL
+  SELECT *
+  FROM menu_items;
+  
+- View the menu_items table and write a query to find the number of items on the menu.
+
 
 ### Exploratory Data Analysis
 ---
