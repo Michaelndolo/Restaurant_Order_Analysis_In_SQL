@@ -6,7 +6,7 @@
 
 -[Data Sources](#data-sources)
 
--[Tools](#tools)
+-[Tools and Techniques Used](#tools-and-techniques-used)
 
 -[Exploratory Data Analysis](#exploratory-data-analysis)
 
@@ -37,7 +37,7 @@ There are three objectives:
 
 Restaurant Orders Data: The primary dataset used for this analysis is from the maven analytics playground  tittled the "sales_data.csv" file, containing two tables menu items table and order details table detailed information about each sale made by the company. We downloaded the SQL option instead of csv since we'll be using MySQL.
 
-### Tools
+### Tools & Techniques Used
 ---
 
 - MySQL - Data Analysis, GROUP BY, HAVING, WHERE, ORDER BY, SUBQUERIES, LEFT JOIN, AGGREGATE FUNCTIONS
