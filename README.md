@@ -14,15 +14,12 @@
 
 -[Recommendations](#recommendations)
 
--[Limitations](#limitations)
-
--[References](#references)
 
 
 ### Project overview
 ---
 
-So you've just been hired as a **Data Analyst** for the **Taste of the World Cafe** which has just debuted a new menu at the start of the year. Your main aim is to dig into the customer data to see which menu items are doing well/not well and what top customers seem to like best.
+So you've just been hired as a **Data Analyst** for the **Taste of the World Cafe** which has just debuted a new menu at the start of the year. **Your main aim is to dig into the customer data to see which menu items are doing well/not well and what top customers seem to like best**.
 
 ### The Objectives
 ---
@@ -44,7 +41,7 @@ The *menu_items table* had 4 columns: menu_item_id, item_name, category and pric
 
 - MySQL Workbench - For Database querying
 
-- Clauses used; GROUP BY, HAVING, WHERE, ORDER BY, SUBQUERIES, LEFT JOIN, AGGREGATE FUNCTIONS
+- Clauses used; GROUP BY, HAVING, WHERE, ORDER BY, SUBQUERIES, LEFT JOIN, AGGREGATE FUNCTIONS.
   
 ### Exploratory Data Analysis
 ---
@@ -236,7 +233,7 @@ EDA involved performing the three objectives mentioned above.
   LIMIT 5;
   ```
 
-- View details of the highest spend order. What insights can you gather from this?
+- View details of the highest spend order. 
     
   ``` SQL
   SELECT category, COUNT(item_id) AS num_items
@@ -247,7 +244,7 @@ EDA involved performing the three objectives mentioned above.
   GROUP BY category;
   ```
 
-- View details of the top 5 highest spend orders. What insights can you gather from this?
+- View details of the top 5 highest spend orders.
     
   ``` SQL
   SELECT order_id, category, COUNT(item_id) AS num_items
@@ -262,25 +259,20 @@ EDA involved performing the three objectives mentioned above.
 ---
 
 Below are some of the findings from our analysis:
-1. The company's sales have been steadily increasing over the past year, with a noticeable peak during the holiday season.
-2. Product Category A is the best-perfoming category in terms of sales and revenue.
-3. Customer segments with high lifetime value (LTV) should be targetted for marketing efforts.
+1. Even though Italian dishes weren't the most popular, the highest spend order tend to like it a lot.
+2. The Mexican Chicken Tacos was the least ordered item on the menu.
+3. The American Hamburger was the most ordered item on the menu.
+4. The Italian and Mexican were the least popular dishes on the menu.
+5. The American and Asian were the most popular dishes on the menu.
+6. The highest spend orders were on the Italian dishes.
 
 ### Recommendations
 ---
 
-Based on our analysis, we recommend the following actions:
-- Invest in marketing and promotions during peak sales seasons to maximize revenue.
-- Focus on expanding and promoting products in Category A.
-- Implement a custoomer segmentation strategy to target high-LTV customers effectively.
-
-### Limitations
----
-
-I had to remove all zero values from the budget and revenue columns because they would have affected the accuracy of my conclusions from the analysis. There are still a few outliers even after the ommissions but even then we can still see that there is a positive correlation between both budget and number of votes with revenue.
-
-### References
----
-
-1. SQL For Data Analysis
-2. [Stack overflow](https:https//stack.com)
+Based on my findings from the above analysis, I would recommend the following actions:
+- Since *Italian dishes attract high-spending customers despite lower overall popularity*, the restaurant should consider **developing premium Italian menu items** that justify higher price points. This could help maximize revenue from these valuable customers.
+- With Mexican Chicken Tacos being the least ordered item and Mexican cuisine showing low popularity overall, either:
+  - Refresh the Mexican dishes with new flavors or presentation.
+  - Consider replacing underperforming Mexican items with new options that align with customer preferences.
+- Create combo meals that pair popular American or Asian dishes with your high-value Italian items to introduce more customers to these options.
+  
