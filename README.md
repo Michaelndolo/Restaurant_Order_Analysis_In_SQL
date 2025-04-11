@@ -6,7 +6,7 @@
 
 -[Data Sources](#data-sources)
 
--[Tools and Techniques Used](#tools-and-techniques-used)
+-[Tools Used](#tools-used)
 
 -[Exploratory Data Analysis](#exploratory-data-analysis)
 
@@ -35,17 +35,22 @@ There are three objectives:
 ### Data Sources
 ---
 
-Restaurant Orders Data: The primary dataset used for this analysis is from the maven analytics playground  tittled the "sales_data.csv" file, containing two tables menu items table and order details table detailed information about each sale made by the company. We downloaded the SQL option instead of csv since we'll be using MySQL.
+Restaurant Orders Data: The primary dataset used for this analysis is from the **Maven Analytics data playground**  titled "**restaurant orders**" file, containing two tables *menu_items table* and *order_details table* detailing information about each sale made by the company. The data had 8 fields and a total of 12,266 records.
 
-### Tools & Techniques Used
+The *menu_items table* had 4 columns: menu_item_id, item_name, category and price whereas the *order_details table* had a total of 5 columns: order_details_id, order_id, order_date, order_time, item_id.
+
+### Tools Used
 ---
 
-- MySQL - Data Analysis, GROUP BY, HAVING, WHERE, ORDER BY, SUBQUERIES, LEFT JOIN, AGGREGATE FUNCTIONS
+- MySQL Workbench - For Database querying
+
+- Clauses used; GROUP BY, HAVING, WHERE, ORDER BY, SUBQUERIES, LEFT JOIN, AGGREGATE FUNCTIONS
   
 ### Exploratory Data Analysis
 ---
 
-Now, it is important to note that the dataset was clean are requirred no cleaning with the main use was to show how Exploratory Data Analysis can be done in MySQL.
+After loading the dataset into MySQL Workbench, it is important to note that the dataset required no cleaning with its main use being to show how Exploratory Data Analysis can be done using MySQL Workbench.
+
 EDA involved performing the three objectives mentioned above. 
 
 #### Objective 1: Explore the menu_items table
